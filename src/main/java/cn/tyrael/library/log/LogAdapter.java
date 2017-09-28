@@ -21,6 +21,10 @@ public class LogAdapter {
 	public static void w(String tag, String content){
 		System.out.println(format(tag, content));
 	}
+
+	public static void w(String tag, String content, Throwable e){
+		System.out.println(format(tag, content));
+	}
 	
 	public static void i(String tag, String content){
 		System.out.println(format(tag, content));
