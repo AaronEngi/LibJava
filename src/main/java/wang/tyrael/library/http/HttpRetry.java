@@ -1,4 +1,4 @@
-package cn.tyrael.library.http;
+package wang.tyrael.library.http;
 
 import okhttp3.*;
 
