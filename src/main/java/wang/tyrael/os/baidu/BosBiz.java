@@ -1,16 +1,19 @@
-package wang.tyrael.os.baidu;
+package cn.tyrael.os.baidu;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
 import java.util.UUID;
 
-import wang.tyrael.library.http.UrlParser;
-import wang.tyrael.library.log.LogAdapter;
+import cn.tyrael.library.http.UrlParser;
+import cn.tyrael.library.log.LogAdapter;
 import com.baidubce.BceClientException;
+import com.baidubce.BceServiceException;
 import com.baidubce.services.bos.BosClient;
 
 
-import wang.tyrael.library.file.FilePathParser;
+import cn.tyrael.library.file.FilePathParser;
 
 /**
  * 为上层提供简单的接口
@@ -31,7 +34,12 @@ public class BosBiz {
 			LogAdapter.w(TAG, "MalformedURLException");
 			return;
 		}
-		bosClient.deleteObject(urlParser.getFirstOfHost(), urlParser.getUrl().getPath());
+		try{
+			bosClient.deleteObject(urlParser.getFirstOfHost(), urlParser.getUrl().getPath());
+		}catch (BceServiceException bceServiceException){
+			LogAdapter.w(TAG, "", bceServiceException);
+		}
+
 	}
 
 	/**

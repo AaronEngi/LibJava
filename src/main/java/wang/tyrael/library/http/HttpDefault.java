@@ -4,11 +4,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class HttpDefault {
-	private static HttpAdapter http;
+	private static HttpRetry http;
 	
 	static{
-		http = new HttpAdapter();
-		http.setClient(new OkHttpClient());
+		http = new HttpRetry();
+//		http.setClient(new OkHttpClient());
 	}
 	
 	public static Response get(String url) {
