@@ -1,4 +1,4 @@
-package cn.tyrael.os.baidu;
+package wang.tyrael.os.baidu;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -6,14 +6,14 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.UUID;
 
-import cn.tyrael.library.http.UrlParser;
-import cn.tyrael.library.log.LogAdapter;
+import wang.tyrael.library.http.UrlParser;
+import wang.tyrael.library.log.LogAdapter;
 import com.baidubce.BceClientException;
 import com.baidubce.BceServiceException;
 import com.baidubce.services.bos.BosClient;
 
 
-import cn.tyrael.library.file.FilePathParser;
+import wang.tyrael.library.file.FilePathParser;
 
 /**
  * 为上层提供简单的接口
