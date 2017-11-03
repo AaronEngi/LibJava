@@ -8,10 +8,7 @@ public class FilePathParser {
 		this.filePath = filePath;
 	}
 
-	/**
-	 * 第一个斜杠前的内容
-	 * @return
-	 */
+
 	public String getFirstDir(){
 		int index = filePath.indexOf("/");
 		//noinspection UnnecessaryLocalVariable
@@ -34,10 +31,6 @@ public class FilePathParser {
 		return s;
 	}
 
-	/**
-	 * 扩展名
-	 * @return
-	 */
 	public String getExt(){
 		int index = filePath.lastIndexOf(".");
 		//noinspection UnnecessaryLocalVariable

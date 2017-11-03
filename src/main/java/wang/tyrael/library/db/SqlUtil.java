@@ -4,10 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class SqlUtil {
-	/**
-	 * ��mapת��Ϊset���
-	 * @return
-	 */
+
 	public static String mapToSet(Map<String, String> map){
 		String set = "";
 		for(Entry<String, String> entry : map.entrySet()){

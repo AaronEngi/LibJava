@@ -16,9 +16,14 @@ dependencies {
     compile 'com.squareup.okio:okio:latest.release'
 
     compile 'com.google.code.gson:gson:latest.release'
-    compile 'com.baidubce:bce-java-sdk:latest.release'
+    //太大了
+//    compile 'com.baidubce:bce-java-sdk:latest.release'
 
-//    compile fileTree(include: ['*.jar'], dir: 'lib')
+    compile fileTree(include: ['*.jar'], dir: 'lib')
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "utf-8"
 }

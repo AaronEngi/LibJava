@@ -38,8 +38,8 @@ public class AesWorker {
 		} catch (NoSuchPaddingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}//"算法/模式/补码方式"
-        IvParameterSpec ivS = new IvParameterSpec(iv.getBytes());//使用CBC模式，需要一个向量iv，可增加加密算法的强度
+		}
+        IvParameterSpec ivS = new IvParameterSpec(iv.getBytes());
         try {
 			cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivS);
 		} catch (InvalidKeyException e) {
@@ -60,7 +60,7 @@ public class AesWorker {
 			e.printStackTrace();
 		}
 
-        return Base64.getEncoder().encodeToString(encrypted);//此处使用BASE64做转码功能，同时能起到2次加密的作用。
+        return Base64.getEncoder().encodeToString(encrypted);
     }
 
     // 解密

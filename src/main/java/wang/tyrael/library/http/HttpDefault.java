@@ -3,6 +3,8 @@ package wang.tyrael.library.http;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
+import java.util.Map;
+
 public class HttpDefault {
 	private static HttpRetry http;
 	
@@ -17,5 +19,9 @@ public class HttpDefault {
 	
 	public static Response post(String url, String json) {
 		return http.post(url, json);
+	}
+
+	public static Response post(String url, Map<String, String> map){
+		return http.post(url, map);
 	}
 }

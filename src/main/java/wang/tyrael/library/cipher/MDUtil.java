@@ -4,13 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MDUtil {
-    /** 
-   * @author：罗国辉 
-   * @date： 2015年12月17日 上午9:24:43 
-   * @description： SHA、SHA1加密
-   * @parameter：  str：待加密字符串
-   * @return： 加密串
-  **/
+
   public static String SHA1(String str) {
     try {
       MessageDigest digest = MessageDigest
