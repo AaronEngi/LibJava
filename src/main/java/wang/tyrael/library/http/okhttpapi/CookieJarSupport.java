@@ -45,7 +45,7 @@ public class CookieJarSupport implements CookieJar {
             }
         }
         if(rememberMe != null){
-            EventBus.getDefault().post(new RememberMeEvent(rememberMe, session));
+            EventBus.getDefault().post(new RememberMeEvent(new wang.tyrael.data.http.Cookie(rememberMe), new wang.tyrael.data.http.Cookie(session)));
         }
     }
 
@@ -59,7 +59,7 @@ public class CookieJarSupport implements CookieJar {
         cookieStore.clear();
     }
 
-    public Cookie getCookie(String host, String key){
+    public wang.tyrael.data.http.Cookie getCookie(String host, String key){
         List<Cookie> list = cookieStore.get(host);
         if(list == null){
             return null;
@@ -67,14 +67,18 @@ public class CookieJarSupport implements CookieJar {
         for (Cookie cookie :
                 list) {
             if(cookie.name().equals(key)){
-                return cookie;
+                return new wang.tyrael.data.http.Cookie(cookie);
             }
         }
         return null;
     }
 
-    public void addCookie(String host, Cookie cookie){
+    public void addCookie(String host, wang.tyrael.data.http.Cookie cookie){
         List<Cookie> list = cookieStore.get(host);
-        list.add(cookie);
+        if(list == null){
+            list = new ArrayList<>();
+            cookieStore.put(host, list);
+        }
+        list.add(cookie.toOkhttpCookie());
     }
 }

@@ -1,9 +1,9 @@
 package wang.tyrael.library.http.okhttp.async;
 
-import okhttp3.Cookie;
 import okhttp3.OkHttpClient;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
+import wang.tyrael.data.http.Cookie;
 import wang.tyrael.library.http.async.RequestData;
 import wang.tyrael.library.http.okhttpapi.ClientApi;
 

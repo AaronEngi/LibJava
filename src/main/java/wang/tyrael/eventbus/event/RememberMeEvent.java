@@ -1,6 +1,7 @@
 package wang.tyrael.eventbus.event;
 
-import okhttp3.Cookie;
+
+import wang.tyrael.data.http.Cookie;
 
 /**
  * Created by 王超 on 2017/11/11.
