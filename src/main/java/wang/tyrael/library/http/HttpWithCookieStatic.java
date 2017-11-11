@@ -8,24 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpWithCookieStatic {
-	private static HttpAdapter http;
-	
-	static{
-		http = new HttpAdapter();
-		http.setClient(new OkHttpClient().newBuilder().cookieJar(new CookieJar() {
-			private final Map<String, List<Cookie>> cookieStore = new HashMap<>();
+	private static HttpWithCookie http = new HttpWithCookie();
 
-			@Override
-			public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-				cookieStore.put(url.host(), cookies);
-			}
-
-			@Override
-			public List<Cookie> loadForRequest(HttpUrl url) {
-				List<Cookie> cookies = cookieStore.get(url.host());
-				return cookies != null ? cookies : new ArrayList<Cookie>();
-			}
-		}).build());
+	public static WebSocket newWebSocket(String wsUrl, WebSocketListener listener){
+		return http.newWebSocket(wsUrl, listener);
 	}
 	
 	public static Response get(String url) {

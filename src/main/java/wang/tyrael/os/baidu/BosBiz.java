@@ -35,7 +35,7 @@ public class BosBiz {
 			return;
 		}
 		try{
-			bosClient.deleteObject(urlParser.getFirstOfHost(), urlParser.getUrl().getPath());
+			bosClient.deleteObject(urlParser.getFirstOfHost(), urlParser.url.getPath());
 		}catch (BceServiceException bceServiceException){
 			LogAdapter.w(TAG, "", bceServiceException);
 		}
