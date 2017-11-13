@@ -12,7 +12,7 @@ import wang.tyrael.library.http.okhttpapi.ClientApi;
  */
 
 public class HttpWithCookieStatic {
-    private static HttpWithCookie httpWithCookie = new HttpWithCookie(ClientApi.getClientWithCookie());
+    private static HttpWithCookie httpWithCookie = new HttpWithEvent(ClientApi.getClientWithCookie());
 
     /**
      * 可以不调用，

@@ -18,7 +18,7 @@ import wang.tyrael.library.http.okhttpapi.OkSender;
 
 public class HttpWithCookie implements IHttpSender {
     private final OkHttpClient okHttpClient ;
-    private final IHttpSender sender;
+    protected final IHttpSender sender;
 
     public HttpWithCookie(OkHttpClient okHttpClient) {
         this.okHttpClient = okHttpClient;

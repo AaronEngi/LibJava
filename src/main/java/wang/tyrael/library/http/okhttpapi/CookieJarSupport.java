@@ -45,6 +45,10 @@ public class CookieJarSupport implements CookieJar {
             }
         }
         if(rememberMe != null){
+            if(rememberMe.value().isEmpty()){
+                return;
+            }
+            //目前的机制，只发送成功
             EventBus.getDefault().post(new RememberMeEvent(new wang.tyrael.data.http.Cookie(rememberMe), new wang.tyrael.data.http.Cookie(session)));
         }
     }
