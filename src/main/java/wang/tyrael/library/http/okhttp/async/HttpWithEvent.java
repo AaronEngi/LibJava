@@ -20,6 +20,7 @@ public class HttpWithEvent extends HttpWithCookie {
 
     @Override
     public void send(RequestData data) {
+        System.out.println("HttpWithEvent send");
         RequestListener original = data.listener;
         data.listener = new RequestListener() {
             @Override

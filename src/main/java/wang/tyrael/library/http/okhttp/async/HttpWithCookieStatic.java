@@ -19,11 +19,12 @@ public class HttpWithCookieStatic {
      * 如果要调用，在第一个请求前调用。以后不要再调用了。
      */
     public static void init(OkHttpClient okHttpClient){
-        System.out.print("HttpWithCookieStatic init");
-        httpWithCookie = new HttpWithCookie(okHttpClient);
+        System.out.println("HttpWithCookieStatic init");
+        httpWithCookie = new HttpWithEvent(okHttpClient);
     }
 
     public static void send(final RequestData data){
+        System.out.println("async HttpWithCookieStatic send");
         httpWithCookie.send(data);
     }
 

@@ -27,6 +27,7 @@ public class HttpWithCookie implements IHttpSender {
 
     @Override
     public void send(RequestData data) {
+        System.out.println("HttpWithCookie send");
         sender.send(data);
     }
 
