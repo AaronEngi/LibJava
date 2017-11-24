@@ -11,4 +11,12 @@ public class EncryptData {
      * 相当于盐。
      */
     public String iv;
+
+    public boolean isValid(){
+        if(encrypt == null || iv == null){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
