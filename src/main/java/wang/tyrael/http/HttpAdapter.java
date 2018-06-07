@@ -48,10 +48,42 @@ public class HttpAdapter {
 	public Response post(String url){
 		return this.post(url, new HashMap<>());
 	}
-	
-	public Response post(String url, String json) {
+
+	public Response post(String url, String str){
+		RequestBody body = RequestBody.create(null, str);
+		Request request = new Request.Builder().url(url).post(body).build();
+		Response response = null;
+		try {
+			response = client.newCall(request).execute();
+			// return response.body().string();
+			// TODO 判断是否登录成功
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	public Response postJson(String url, String json) {
 		RequestBody body = RequestBody.create(JSON, json);
 		Request request = new Request.Builder().url(url).post(body).build();
+		Response response = null;
+		try {
+			response = client.newCall(request).execute();
+			// return response.body().string();
+			// TODO 判断是否登录成功
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	public Response post(String url, String json, Map<String, String> header) {
+		RequestBody body = RequestBody.create(JSON, json);
+		Request.Builder builder =new Request.Builder().url(url).post(body);
+        header.entrySet().stream().forEach(entry->builder.addHeader(entry.getKey(), entry.getValue()));
+		Request request = builder.build();
 		Response response = null;
 		try {
 			response = client.newCall(request).execute();
@@ -67,14 +99,14 @@ public class HttpAdapter {
 	public Response post(String url, Map<String, String> params) {
 		FormBody.Builder mFormBodyBuilder = new FormBody.Builder();
 		for (Map.Entry<String, String> entry : params.entrySet()) {
-			// if (TextUtils.isEmpty(entry.getKey())) {
-			// LogHelper.d(TAG, "TextUtils.isEmpty(entry.getKey()");
-			// continue;
-			// }
-			// if (TextUtils.isEmpty(entry.getValue())) {
-			// LogHelper.d(TAG, "TextUtils.isEmpty(entry.getValue())");
-			// continue;
-			// }
+//			 if (TextUtils.isEmpty(entry.getKey())) {
+//			 LogHelper.d(TAG, "TextUtils.isEmpty(entry.getKey()");
+//			 continue;
+//			 }
+//			 if (TextUtils.isEmpty(entry.getValue())) {
+//			 LogHelper.d(TAG, "TextUtils.isEmpty(entry.getValue())");
+//			 continue;
+//			 }
 
 			mFormBodyBuilder.add(entry.getKey(), entry.getValue());
 			// logParams += entry.getKey() + "=" + entry.getValue() + ",";
@@ -84,7 +116,6 @@ public class HttpAdapter {
 		RequestBody requestBody = mFormBodyBuilder.build();
 
 		Request request = new Request.Builder().url(url)
-				// .header("HTTP_X_FORWARDED_FOR", "123.123.123.123")
 				.post(requestBody).build();
 
 		Response response = null;
@@ -247,4 +278,7 @@ public class HttpAdapter {
 		}
 	}
 
+	public OkHttpClient getClient() {
+		return client;
+	}
 }

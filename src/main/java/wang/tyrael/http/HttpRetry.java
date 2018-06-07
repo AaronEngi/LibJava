@@ -31,7 +31,15 @@ public class HttpRetry {
         return http.post(url, json);
     }
 
+    public Response post(String url, String json, Map<String, String> header) {
+        return http.post(url, json, header);
+    }
+
     public Response post(String url, Map<String, String> map) {
         return http.post(url, map);
+    }
+
+    public OkHttpClient getClient() {
+        return http.getClient();
     }
 }

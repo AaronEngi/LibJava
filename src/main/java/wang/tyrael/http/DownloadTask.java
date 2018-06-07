@@ -1,6 +1,7 @@
 package wang.tyrael.http;
 
 import okhttp3.Response;
+import wang.tyrael.http.simpleapi.HttpDefault;
 
 import java.io.File;
 import java.io.FileOutputStream;

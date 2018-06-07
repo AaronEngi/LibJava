@@ -4,6 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 
@@ -16,6 +17,7 @@ dependencies {
     compile 'com.squareup.okio:okio:latest.release'
 
     compile 'com.google.code.gson:gson:latest.release'
+    compile 'com.alibaba:fastjson:latest.release'
 
     compile 'org.greenrobot:eventbus:latest.release'
 
