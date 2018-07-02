@@ -3,7 +3,7 @@ package wang.tyrael.cipher;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MDUtil {
+public class MessageDigestStatic {
 
   public static String SHA1(String str) {
     try {

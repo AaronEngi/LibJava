@@ -5,5 +5,13 @@ package wang.tyrael.cipher;
  * @Date: 2018/6/27 10:34
  * @Description:
  */
-public class MD5Template {
+public abstract class MD5Template extends MessageDigestTemplate {
+    protected MD5Template(String src) {
+        super(src);
+    }
+
+    @Override
+    public byte[] compute(byte[] bSrc) {
+        return Md5Util.computeByte(bSrc);
+    }
 }
