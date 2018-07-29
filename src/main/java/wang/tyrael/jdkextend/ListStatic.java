@@ -1,7 +1,5 @@
 package wang.tyrael.jdkextend;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  * @Description:
  */
 public class ListStatic {
-    public boolean equal(@NotNull List a, @NotNull List b){
+    public boolean equal(List a,  List b){
         if (a.size() != b.size()) return false;
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i) != b.get(i)) return false;

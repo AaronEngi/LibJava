@@ -1,6 +1,6 @@
 package wang.tyrael.jdkextend;
 
-import com.sun.istack.internal.NotNull;
+
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  * @Description:
  */
 public class SetStatic {
-    public boolean equal(@NotNull Set a, @NotNull Set b){
+    public boolean equal( Set a,  Set b){
         if (a.size() != b.size()) return false;
         for (Object o : a) {
             if (!b.contains(o)) return false;
