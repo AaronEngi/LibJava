@@ -20,6 +20,7 @@ dependencies {
     compile 'com.alibaba:fastjson:latest.release'
 
     compile 'org.greenrobot:eventbus:latest.release'
+    implementation 'com.google.guava:guava:26.0-android'
 
     //太大了
 //    compile 'com.baidubce:bce-java-sdk:latest.release'

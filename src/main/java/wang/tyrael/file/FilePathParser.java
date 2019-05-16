@@ -37,5 +37,4 @@ public class FilePathParser {
 		String s = filePath.substring(index + 1);
 		return s;
 	}
-
 }
