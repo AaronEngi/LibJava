@@ -23,19 +23,15 @@ public class FileUtil {
     private static final String TAG = "FileUtil";
 
     public static boolean copy(@Nonnull File source, @Nonnull File dest) throws IOException {
+        //noinspection ResultOfMethodCallIgnored
         dest.getParentFile().mkdirs();
         if (!dest.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             dest.createNewFile();
         }
-        FileChannel inputChannel = null;
-        FileChannel outputChannel = null;
-        try {
-            inputChannel = new FileInputStream(source).getChannel();
-            outputChannel = new FileOutputStream(dest).getChannel();
+        try (FileChannel inputChannel = new FileInputStream(source).getChannel();
+             FileChannel outputChannel = new FileOutputStream(dest).getChannel()) {
             outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
-        } finally {
-            inputChannel.close();
-            outputChannel.close();
         }
         return true;
     }
@@ -53,6 +49,9 @@ public class FileUtil {
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (data == null) {
+            return null;
         }
         return new String(data);
     }
