@@ -16,6 +16,16 @@ public class TimeSupport {
         Calendar calendar = TimeSupport.getBeijingCalendar();
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long daysFromNow(int diff) {
+        Calendar calendar = TimeSupport.getBeijingCalendar();
+        calendar.add(Calendar.DAY_OF_MONTH, diff);
         return calendar.getTimeInMillis();
     }
 }
