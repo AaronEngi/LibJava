@@ -24,8 +24,9 @@ public class TimeSupport {
     }
 
     public static long daysFromNow(int diff) {
-        Calendar calendar = TimeSupport.getBeijingCalendar();
-        calendar.add(Calendar.DAY_OF_MONTH, diff);
-        return calendar.getTimeInMillis();
+        return System.currentTimeMillis() + diff * 24 * 60 * 60 * 1000L;
+//        Calendar calendar = TimeSupport.getBeijingCalendar();
+//        calendar.add(Calendar.DAY_OF_MONTH, diff);
+//        return calendar.getTimeInMillis();
     }
 }
