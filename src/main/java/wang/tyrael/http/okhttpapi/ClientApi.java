@@ -1,8 +1,15 @@
 package wang.tyrael.http.okhttpapi;
 
+import com.baidubce.BuildConfig;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * Created by wangchao on 2017/2/28.
@@ -28,5 +35,26 @@ public class ClientApi {
 
     public static OkHttpClient getClientWithCookie() {
         return clientWithCookie;
+    }
+
+    public static OkHttpClient.Builder enableSystemLog(OkHttpClient.Builder builder) {
+        if (builder == null){
+            builder = new OkHttpClient.Builder();
+        }
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request(); //Current Request
+                Response response = chain.proceed(originalRequest); //Get response of the request
+                //I am logging the response body in debug mode. When I do this I consume the response (OKHttp only lets you do this once) so i have re-build a new one using the cached body
+                String bodyString = response.body().string();
+                System.out.println(String.format("Sending request %s with headers %s ", originalRequest.url(), originalRequest.headers()));
+                System.out.println(String.format("Got response HTTP %s %s \n\n with body %s \n\n with headers %s ",
+                        response.code(), response.message(), bodyString, response.headers()));
+                response = response.newBuilder().body(ResponseBody.create(response.body().contentType(), bodyString)).build();
+                return response;
+            }
+        });
+        return builder;
     }
 }
