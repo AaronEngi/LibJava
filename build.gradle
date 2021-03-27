@@ -13,21 +13,21 @@ repositories {
 }
 
 dependencies {
-    compile 'com.squareup.okhttp3:okhttp:latest.release'
-    compile 'com.squareup.okio:okio:latest.release'
+    implementation 'com.squareup.okhttp3:okhttp:latest.release'
+    implementation 'com.squareup.okio:okio:latest.release'
 
-    compile 'com.google.code.gson:gson:latest.release'
-    compile 'com.alibaba:fastjson:latest.release'
+    implementation 'com.google.code.gson:gson:latest.release'
+    implementation 'com.alibaba:fastjson:latest.release'
 
-    compile 'org.greenrobot:eventbus:latest.release'
+    implementation 'org.greenrobot:eventbus:latest.release'
     implementation 'com.google.guava:guava:26.0-android'
 
     //太大了
 //    compile 'com.baidubce:bce-java-sdk:latest.release'
 
-    compile fileTree(include: ['*.jar'], dir: 'lib')
+    implementation fileTree(include: ['*.jar'], dir: 'lib')
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 tasks.withType(JavaCompile) {

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import wang.tyrael.log.LogAdapter;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -17,6 +16,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import wang.tyrael.log.LogAdapter;
 
 /**
  * 封装底层框架
@@ -32,8 +32,9 @@ public class HttpAdapter {
 
 	public Response get(String url) {
 		Request request = new Request.Builder()
-				 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36")
-				.url(url).build();
+				.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36")
+				.url(url)
+				.build();
 		Response response = null;
 		try {
 			response = client.newCall(request).execute();
