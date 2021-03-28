@@ -1,4 +1,4 @@
-package wang.tyrael.http;
+package wang.tyrael.http.url;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

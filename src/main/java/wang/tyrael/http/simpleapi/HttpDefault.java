@@ -1,27 +1,26 @@
 package wang.tyrael.http.simpleapi;
 
-import okhttp3.OkHttpClient;
+import java.util.Map;
+
 import okhttp3.Response;
 import wang.tyrael.http.HttpAdapter;
-
-import java.util.Map;
 
 /**
  * 封装通用的功能，大部分情况只要调用一个方法就可以发送请求了。
  * 少部分需要获取内部，进行配置，仅用于应急
  */
 public class HttpDefault {
-	private static HttpAdapter http;
-	
-	static{
-		http = HttpFactory.createDefault();
-	}
+    private static final HttpAdapter http;
 
-	public static Response get(String url) {
-		return http.get(url);
-	}
-	
-	public static Response post(String url, String json) {
+    static {
+        http = HttpFactory.createDefault();
+    }
+
+    public static Response get(String url) {
+        return http.get(url);
+    }
+
+    public static Response post(String url, String json) {
 		return http.post(url, json);
 	}
 

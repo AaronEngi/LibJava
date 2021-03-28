@@ -1,17 +1,15 @@
 package wang.tyrael.os.baidu;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.util.UUID;
-
-import wang.tyrael.http.UrlParser;
-import wang.tyrael.log.LogAdapter;
 import com.baidubce.BceClientException;
 import com.baidubce.BceServiceException;
 import com.baidubce.services.bos.BosClient;
 
+import java.io.File;
+import java.util.UUID;
 
 import wang.tyrael.file.FilePathParser;
+import wang.tyrael.http.url.UrlParser;
+import wang.tyrael.log.LogAdapter;
 
 /**
  * 为上层提供简单的接口
