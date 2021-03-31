@@ -41,17 +41,14 @@ public class FileUtil {
     }
 
     public static String readString(String path) {
-        byte[] data = null;
+        byte[] data;
         try {
             InputStream in = new FileInputStream(path);
             data = new byte[in.available()];
             in.read(data);
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (data == null) {
-            return null;
+            throw new RuntimeException(e);
         }
         return new String(data);
     }
