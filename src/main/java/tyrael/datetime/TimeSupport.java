@@ -1,4 +1,4 @@
-package wang.tyrael.datetime;
+package tyrael.datetime;
 
 import java.util.Calendar;
 import java.util.TimeZone;

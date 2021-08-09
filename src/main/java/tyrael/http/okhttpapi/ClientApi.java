@@ -1,4 +1,4 @@
-package wang.tyrael.http.okhttpapi;
+package tyrael.http.okhttpapi;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
