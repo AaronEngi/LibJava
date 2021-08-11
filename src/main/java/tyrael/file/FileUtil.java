@@ -22,6 +22,14 @@ import javax.annotation.Nonnull;
 public class FileUtil {
     private static final String TAG = "FileUtil";
 
+    public static boolean copy(@Nonnull String src, @Nonnull FileOutputStream dest) throws IOException {
+        try (FileChannel inputChannel = new FileInputStream(src).getChannel();
+             FileChannel outputChannel = dest.getChannel()) {
+            outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
+        }
+        return true;
+    }
+
     public static boolean copy(@Nonnull File source, @Nonnull File dest) throws IOException {
         //noinspection ResultOfMethodCallIgnored
         dest.getParentFile().mkdirs();

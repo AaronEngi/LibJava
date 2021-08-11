@@ -1,9 +1,13 @@
 package tyrael.datetime;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class TimeSupport {
+public class TimeUtil {
     public static long ONE_DAY_MILLIS = 3600 * 24 * 1000L;
 
     public static Calendar getBeijingCalendar() {
@@ -15,7 +19,7 @@ public class TimeSupport {
     }
 
     public static long getTime(int month, int day) {
-        Calendar calendar = TimeSupport.getBeijingCalendar();
+        Calendar calendar = TimeUtil.getBeijingCalendar();
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -33,7 +37,12 @@ public class TimeSupport {
     }
 
     public static Calendar getDayStartCalendar(long time) {
-        Calendar calendar = TimeSupport.getBeijingCalendar();
+        LocalTime midnight = LocalTime.MIDNIGHT;
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Shanghai"));
+        LocalDateTime todayMidnight = LocalDateTime.of(today, midnight);
+        LocalDateTime tomorrowMidnight = todayMidnight.plusDays(1);
+
+        Calendar calendar = TimeUtil.getBeijingCalendar();
         calendar.setTimeInMillis(time);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -43,7 +52,7 @@ public class TimeSupport {
     }
 
     public static long getDayStart(long time) {
-        Calendar calendar = TimeSupport.getBeijingCalendar();
+        Calendar calendar = TimeUtil.getBeijingCalendar();
         calendar.setTimeInMillis(time);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
