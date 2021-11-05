@@ -73,6 +73,29 @@ public class FileUtil {
         return new Gson().fromJson(s, c);
     }
 
+    public static <T> T readJson(InputStream is, Class<T> c) {
+        byte[] b = getBytes(is);
+        //LogAdapter.d(TAG, "" + b);
+        if (b == null) {
+            return null;
+        }
+        String s = new String(b, StandardCharsets.UTF_8);
+        //LogAdapter.d(TAG, s);
+        return new Gson().fromJson(s, c);
+    }
+
+    public static byte[] getBytes(InputStream in) {
+        byte[] data = null;
+        try {
+            data = new byte[in.available()];
+            //noinspection ResultOfMethodCallIgnored
+            in.read(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     public static byte[] getBytes(String path) {
         byte[] data = null;
         try {

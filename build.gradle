@@ -7,6 +7,11 @@ version '1.0.3'
 
 apply plugin: 'java'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 repositories {
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
     mavenCentral()
@@ -48,3 +53,4 @@ publishing {
     }
 }
 //~~~~~~~~~~~~~~~~~~~~~~
+
