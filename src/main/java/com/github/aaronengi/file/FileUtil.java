@@ -3,6 +3,7 @@ package com.github.aaronengi.file;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -74,12 +76,23 @@ public class FileUtil {
     }
 
     public static <T> T readJson(InputStream is, Class<T> c) {
-        byte[] b = getBytes(is);
-        //LogAdapter.d(TAG, "" + b);
-        if (b == null) {
-            return null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        try {
+            while ((len = is.read(buffer, 0, 1024)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        String s = new String(b, StandardCharsets.UTF_8);
+
+        String s = null;
+        try {
+            s = baos.toString(StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         //LogAdapter.d(TAG, s);
         return new Gson().fromJson(s, c);
     }
