@@ -218,9 +218,10 @@ public class FileUtil {
     public static void write(String sFile, InputStream inputStream) {
         try {
             File file = new File(sFile);
+            // TODO: 11/9/2021 spring tomcat nullpoint
             file.getParentFile().mkdirs();
 
-            // if file doesnt exists, then create it
+            // if file does not exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
             }
