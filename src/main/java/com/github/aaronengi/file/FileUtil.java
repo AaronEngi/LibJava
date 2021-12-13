@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -63,6 +64,26 @@ public class FileUtil {
         return new String(data);
     }
 
+    public static String readString(InputStream is) {
+        //is.read 在spring tomcat中只能读100KB
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        try {
+            for (int length; (length = is.read(buffer)) != -1; ) {
+                result.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String s = null;
+        try {
+            s = result.toString(StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
     public static <T> T readJson(String path, Class<T> c) {
         byte[] b = getBytes(path);
         //LogAdapter.d(TAG, "" + b);
@@ -95,6 +116,26 @@ public class FileUtil {
         }
         //LogAdapter.d(TAG, s);
         return new Gson().fromJson(s, c);
+    }
+
+    public static <T> List<T> readJsonList(InputStream is, Type listType) {
+        //is.read 在spring tomcat中只能读100KB
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        try {
+            for (int length; (length = is.read(buffer)) != -1; ) {
+                result.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String s = null;
+        try {
+            s = result.toString(StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new Gson().fromJson(s, listType);
     }
 
     public static byte[] getBytes(InputStream in) {
