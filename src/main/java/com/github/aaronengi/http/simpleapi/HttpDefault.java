@@ -1,6 +1,7 @@
 package com.github.aaronengi.http.simpleapi;
 
 import com.github.aaronengi.http.HttpAdapter;
+import com.github.aaronengi.http.HttpFactory;
 
 import java.util.Map;
 
