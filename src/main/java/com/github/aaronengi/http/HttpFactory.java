@@ -50,7 +50,15 @@ public class HttpFactory {
             @Override
             public List<Cookie> loadForRequest(HttpUrl url) {
                 List<Cookie> cookies = cookieStore.get(url.host());
-                return cookies != null ? cookies : new ArrayList<Cookie>();
+                List<Cookie> result = new ArrayList<>();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.expiresAt() > System.currentTimeMillis()) {
+                            result.add(cookie);
+                        }
+                    }
+                }
+                return result;
             }
         })
                 .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS)
