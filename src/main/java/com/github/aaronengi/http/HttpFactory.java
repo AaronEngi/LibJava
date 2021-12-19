@@ -45,12 +45,14 @@ public class HttpFactory {
 
             @Override
             public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                cookieStore.put(url.host(), cookies);
+//                System.out.println("saveFromResponse:" + cookies);
+                cookieStore.put(url.topPrivateDomain(), cookies);
             }
 
             @Override
             public List<Cookie> loadForRequest(HttpUrl url) {
-                List<Cookie> cookies = cookieStore.get(url.host());
+                List<Cookie> cookies = cookieStore.get(url.topPrivateDomain());
+//                System.out.println("loadForRequest:" + cookies);
                 List<Cookie> result = new ArrayList<>();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
@@ -59,6 +61,7 @@ public class HttpFactory {
                         }
                     }
                 }
+//                System.out.println("loadForRequest:" + result);
                 return result;
             }
         })
