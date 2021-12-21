@@ -1,18 +1,12 @@
 package com.github.aaronengi.http;
 
-import com.github.aaronengi.http.HttpAdapter;
+import com.github.aaronengi.http.okhttpapi.PersistCookieJar;
 
 import java.net.Proxy;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
+import javax.annotation.Nullable;
+
 import okhttp3.OkHttpClient;
 
 public class HttpFactory {
@@ -36,35 +30,11 @@ public class HttpFactory {
      */
     private static final long PING_INTERVAL_MS = 50 * 1000;
 
-    public static HttpAdapter createCookieEnabled() {
+    public static HttpAdapter createCookieEnabled(@Nullable String cookieFilePath) {
         HttpAdapter http;
         OkHttpClient okHttpClient;
         http = new HttpAdapter();
-        okHttpClient = new OkHttpClient().newBuilder().cookieJar(new CookieJar() {
-            private final Map<String, List<Cookie>> cookieStore = new HashMap<>();
-
-            @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-//                System.out.println("saveFromResponse:" + cookies);
-                cookieStore.put(url.topPrivateDomain(), cookies);
-            }
-
-            @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                List<Cookie> cookies = cookieStore.get(url.topPrivateDomain());
-//                System.out.println("loadForRequest:" + cookies);
-                List<Cookie> result = new ArrayList<>();
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        if (cookie.expiresAt() > System.currentTimeMillis()) {
-                            result.add(cookie);
-                        }
-                    }
-                }
-//                System.out.println("loadForRequest:" + result);
-                return result;
-            }
-        })
+        okHttpClient = new OkHttpClient().newBuilder().cookieJar(new PersistCookieJar(cookieFilePath))
                 .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS)
                 .build();
         http.setClient(okHttpClient);

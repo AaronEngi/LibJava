@@ -3,7 +3,7 @@ package tyrael.http.okhttp.async;
 import okhttp3.OkHttpClient;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import tyrael.data.http.Cookie;
+import com.github.aaronengi.http.CookieData;
 import tyrael.http.async.RequestData;
 import tyrael.http.okhttpapi.ClientApi;
 
@@ -36,11 +36,11 @@ public class HttpWithCookieStatic {
         httpWithCookie.clearCookie();
     }
 
-    public static Cookie getCookie(String host, String key){
+    public static CookieData getCookie(String host, String key){
         return httpWithCookie.getCookie(host, key);
     }
 
-    public static void addCookie(String host, Cookie cookie){
+    public static void addCookie(String host, CookieData cookie){
         httpWithCookie.addCookie(host, cookie);
     }
 }

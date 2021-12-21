@@ -1,17 +1,17 @@
 package tyrael.eventbus.event;
 
 
-import tyrael.data.http.Cookie;
+import com.github.aaronengi.http.CookieData;
 
 /**
  * Created by 王超 on 2017/11/11.
  */
 
 public class RememberMeEvent {
-    public final Cookie rememberMe;
-    public final Cookie session;
+    public final CookieData rememberMe;
+    public final CookieData session;
 
-    public RememberMeEvent(Cookie rememberMe, Cookie session) {
+    public RememberMeEvent(CookieData rememberMe, CookieData session) {
         this.rememberMe = rememberMe;
         this.session = session;
     }

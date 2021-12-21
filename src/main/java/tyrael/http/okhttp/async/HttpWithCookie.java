@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import tyrael.data.http.Cookie;
+import com.github.aaronengi.http.CookieData;
 import tyrael.http.async.IHttpSender;
 import tyrael.http.async.RequestData;
 import tyrael.http.okhttpapi.CookieJarSupport;
@@ -41,12 +41,12 @@ public class HttpWithCookie implements IHttpSender {
         cookieJarSupport.clear();
     }
 
-    public Cookie getCookie(String host, String key){
+    public CookieData getCookie(String host, String key){
         CookieJarSupport cookieJarSupport = (CookieJarSupport) okHttpClient.cookieJar();
         return cookieJarSupport.getCookie(host, key);
     }
 
-    public void addCookie(String host, Cookie cookie){
+    public void addCookie(String host, CookieData cookie){
         CookieJarSupport cookieJarSupport = (CookieJarSupport) okHttpClient.cookieJar();
         cookieJarSupport.addCookie(host, cookie);
     }

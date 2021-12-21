@@ -2,14 +2,14 @@ package com.github.aaronengi.http.okhttp.async;
 
 import com.github.aaronengi.http.async.IHttpSender;
 import com.github.aaronengi.http.async.RequestData;
-import com.github.aaronengi.http.okhttpapi.CookieJarSupport;
+import com.github.aaronengi.http.okhttpapi.PersistCookieJar;
 import com.github.aaronengi.http.okhttpapi.OkSender;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import tyrael.data.http.Cookie;
+import com.github.aaronengi.http.CookieData;
 
 /**
  * Created by 王超 on 2017/11/11.
@@ -38,17 +38,17 @@ public class HttpWithCookie implements IHttpSender {
     }
 
     public void clearCookie() {
-        CookieJarSupport cookieJarSupport = (CookieJarSupport) okHttpClient.cookieJar();
+        PersistCookieJar cookieJarSupport = (PersistCookieJar) okHttpClient.cookieJar();
         cookieJarSupport.clear();
     }
 
-    public Cookie getCookie(String host, String key) {
-        CookieJarSupport cookieJarSupport = (CookieJarSupport) okHttpClient.cookieJar();
+    public CookieData getCookie(String host, String key) {
+        PersistCookieJar cookieJarSupport = (PersistCookieJar) okHttpClient.cookieJar();
         return cookieJarSupport.getCookie(host, key);
     }
 
-    public void addCookie(String host, Cookie cookie) {
-        CookieJarSupport cookieJarSupport = (CookieJarSupport) okHttpClient.cookieJar();
+    public void addCookie(String host, CookieData cookie) {
+        PersistCookieJar cookieJarSupport = (PersistCookieJar) okHttpClient.cookieJar();
         cookieJarSupport.addCookie(host, cookie);
     }
 

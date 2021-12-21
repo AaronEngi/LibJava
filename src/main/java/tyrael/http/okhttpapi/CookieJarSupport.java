@@ -1,5 +1,7 @@
 package tyrael.http.okhttpapi;
 
+import com.github.aaronengi.http.CookieData;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class CookieJarSupport implements CookieJar {
                 return;
             }
             //目前的机制，只发送成功
-            EventBus.getDefault().post(new RememberMeEvent(new tyrael.data.http.Cookie(rememberMe), new tyrael.data.http.Cookie(session)));
+            EventBus.getDefault().post(new RememberMeEvent(new CookieData(rememberMe), new CookieData(session)));
         }
     }
 
@@ -63,7 +65,7 @@ public class CookieJarSupport implements CookieJar {
         cookieStore.clear();
     }
 
-    public tyrael.data.http.Cookie getCookie(String host, String key){
+    public CookieData getCookie(String host, String key){
         List<Cookie> list = cookieStore.get(host);
         if(list == null){
             return null;
@@ -71,18 +73,18 @@ public class CookieJarSupport implements CookieJar {
         for (Cookie cookie :
                 list) {
             if(cookie.name().equals(key)){
-                return new tyrael.data.http.Cookie(cookie);
+                return new CookieData(cookie);
             }
         }
         return null;
     }
 
-    public void addCookie(String host, tyrael.data.http.Cookie cookie){
+    public void addCookie(String host, CookieData cookie){
         List<Cookie> list = cookieStore.get(host);
         if(list == null){
             list = new ArrayList<>();
             cookieStore.put(host, list);
         }
-        list.add(cookie.toOkhttpCookie());
+        list.add(cookie.newOkhttpCookie());
     }
 }

@@ -1,10 +1,9 @@
 package wang.tyrael.http;
 
+import com.github.aaronengi.http.okhttpapi.PersistCookieJar;
+
 import okhttp3.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -27,20 +26,7 @@ public class HttpWithCookie {
 
 	public HttpWithCookie(){
 		http = new HttpAdapter();
-		okHttpClient = new OkHttpClient().newBuilder().cookieJar(new CookieJar() {
-			private final Map<String, List<Cookie>> cookieStore = new HashMap<>();
-
-			@Override
-			public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-				cookieStore.put(url.host(), cookies);
-			}
-
-			@Override
-			public List<Cookie> loadForRequest(HttpUrl url) {
-				List<Cookie> cookies = cookieStore.get(url.host());
-				return cookies != null ? cookies : new ArrayList<Cookie>();
-			}
-		})
+		okHttpClient = new OkHttpClient().newBuilder().cookieJar(new PersistCookieJar())
                 .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS)
                 .build();
 		http.setClient(okHttpClient);

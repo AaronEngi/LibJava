@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -282,5 +284,49 @@ public class FileUtil {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public static <T> T readObject(String persistFilePath) {
+        Object temp = null;
+        File file = new File(persistFilePath);
+        FileInputStream in;
+        try {
+            in = new FileInputStream(file);
+            ObjectInputStream objIn = new ObjectInputStream(in);
+            temp = objIn.readObject();
+            objIn.close();
+        } catch (IOException e) {
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return (T) temp;
+    }
+
+    public static void writeObject(String persistFilePath, Object obj) {
+        File file = ensureFile(persistFilePath);
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(file);
+            ObjectOutputStream objOut = new ObjectOutputStream(out);
+            objOut.writeObject(obj);
+            objOut.flush();
+            objOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static File ensureFile(String path) {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
     }
 }

@@ -23,7 +23,7 @@ public class ClientApi {
             .build();
 
     private static final OkHttpClient clientWithCookie = new OkHttpClient().newBuilder()
-            .cookieJar(new CookieJarSupport())
+            .cookieJar(new PersistCookieJar())
             .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS)
             .build();
 

@@ -6,7 +6,7 @@ import com.github.aaronengi.http.okhttpapi.ClientApi;
 import okhttp3.OkHttpClient;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import tyrael.data.http.Cookie;
+import com.github.aaronengi.http.CookieData;
 
 /**
  * Created by 王超 on 2017/11/11.
@@ -37,11 +37,11 @@ public class HttpWithCookieStatic {
         httpWithCookie.clearCookie();
     }
 
-    public static Cookie getCookie(String host, String key) {
+    public static CookieData getCookie(String host, String key) {
         return httpWithCookie.getCookie(host, key);
     }
 
-    public static void addCookie(String host, Cookie cookie) {
+    public static void addCookie(String host, CookieData cookie) {
         httpWithCookie.addCookie(host, cookie);
     }
 }
