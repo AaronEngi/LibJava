@@ -3,6 +3,7 @@ package com.github.aaronengi.http;
 import com.github.aaronengi.http.okhttpapi.PersistCookieJar;
 
 import java.net.Proxy;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
@@ -10,6 +11,11 @@ import javax.annotation.Nullable;
 import okhttp3.OkHttpClient;
 
 public class HttpFactory {
+    private static OkHttpClient.Builder defaultBuilder(){
+        Duration timeOut = Duration.ofSeconds(60);
+        return new OkHttpClient().newBuilder().connectTimeout(timeOut).readTimeout(timeOut).writeTimeout(timeOut);
+    }
+
     public static HttpAdapter createDefault() {
         HttpAdapter httpAdapter = new HttpAdapter();
         httpAdapter.setClient(new OkHttpClient());
@@ -34,7 +40,7 @@ public class HttpFactory {
         HttpAdapter http;
         OkHttpClient okHttpClient;
         http = new HttpAdapter();
-        okHttpClient = new OkHttpClient().newBuilder().cookieJar(new PersistCookieJar(cookieFilePath))
+        okHttpClient = defaultBuilder().cookieJar(new PersistCookieJar(cookieFilePath))
                 .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS)
                 .build();
         http.setClient(okHttpClient);
