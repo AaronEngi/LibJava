@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class FileUtil {
     private static final String TAG = "FileUtil";
@@ -286,7 +287,11 @@ public class FileUtil {
         }
     }
 
-    public static <T> T readObject(String persistFilePath) {
+    @Nullable
+    public static <T> T readObject(@Nullable String persistFilePath) {
+        if (persistFilePath == null) {
+            return null;
+        }
         Object temp = null;
         File file = new File(persistFilePath);
         FileInputStream in;
@@ -303,7 +308,10 @@ public class FileUtil {
         return (T) temp;
     }
 
-    public static void writeObject(String persistFilePath, Object obj) {
+    public static void writeObject(@Nullable String persistFilePath, Object obj) {
+        if (persistFilePath == null) {
+            return;
+        }
         File file = ensureFile(persistFilePath);
         FileOutputStream out;
         try {

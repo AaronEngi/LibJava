@@ -2,17 +2,20 @@ package com.github.aaronengi.http.okhttpapi;
 
 import com.github.aaronengi.file.FileUtil;
 import com.github.aaronengi.http.CookieData;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 
 /**
  * JSESSIONID
@@ -30,6 +33,7 @@ import java.util.Map;
 public class PersistCookieJar implements CookieJar {
     //for Serializable
     private Map<String, List<CookieData>> cookieCache;
+    @Nullable
     private final String persistFilePath;
 
     public PersistCookieJar() {
