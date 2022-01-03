@@ -17,6 +17,9 @@ public class Parser {
             position = new ParsePosition(0);
         }
         Number number = NumberFormat.getPercentInstance().parse(p, position);
+        if (number == null) {
+            return 0;
+        }
         return number.doubleValue();
     }
 

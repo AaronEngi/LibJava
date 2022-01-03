@@ -11,9 +11,14 @@ import javax.annotation.Nullable;
 import okhttp3.OkHttpClient;
 
 public class HttpFactory {
-    private static OkHttpClient.Builder defaultBuilder(){
+    public static OkHttpClient.Builder defaultBuilder() {
         Duration timeOut = Duration.ofSeconds(60);
         return new OkHttpClient().newBuilder().connectTimeout(timeOut).readTimeout(timeOut).writeTimeout(timeOut);
+    }
+
+    public static OkHttpClient.Builder enableCookie(OkHttpClient.Builder builder, String cookieFilePath) {
+        return builder.cookieJar(new PersistCookieJar(cookieFilePath))
+                .pingInterval(PING_INTERVAL_MS, TimeUnit.MILLISECONDS);
     }
 
     public static HttpAdapter createDefault() {
