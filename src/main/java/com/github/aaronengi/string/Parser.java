@@ -1,11 +1,30 @@
 package com.github.aaronengi.string;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.annotation.Nullable;
 
 public class Parser {
+
+    public static Date parseDate(@Nullable String value, @Nullable String format, Date defaultDate) {
+        if (value == null) {
+            return defaultDate;
+        }
+        if (format == null) {
+            format = "yyyy-MM-dd";
+        }
+        try {
+            return new SimpleDateFormat(format).parse(value);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return defaultDate;
+        }
+    }
+
     public static double parsePercent(String p) {
         if (p == null) {
             return 0;
