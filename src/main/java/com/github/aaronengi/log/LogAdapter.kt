@@ -6,7 +6,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object LogAdapter {
+    enum class Level {
+        V, D
+    }
+
     private val sDebugConfig = DebugConfig.getInstance()
+    var level = Level.D
     private val sDateFormat: DateFormat = SimpleDateFormat("yyyy.MM.dd. HH:mm:ss SSS")
 
     /**
@@ -41,6 +46,13 @@ object LogAdapter {
 
     fun d(tag: String, content: String) {
         if (sDebugConfig.isDebuggable) {
+            println(format(tag, content))
+        } else {
+        }
+    }
+
+    fun v(tag: String, content: String) {
+        if (level >= Level.V) {
             println(format(tag, content))
         } else {
         }
