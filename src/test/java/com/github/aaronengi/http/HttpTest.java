@@ -1,6 +1,6 @@
 package com.github.aaronengi.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HttpTest {
     @Test

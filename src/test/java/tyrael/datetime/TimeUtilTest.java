@@ -1,14 +1,13 @@
 package tyrael.datetime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import wang.tyrael.datetime.TimeSupport;
 
 import java.util.Calendar;
 
-import wang.tyrael.datetime.TimeSupport;
-
 public class TimeUtilTest {
     @Test
-    public void testAddDay(){
+    public void testAddDay() {
         long startTime = System.currentTimeMillis();
         Calendar calendar = TimeSupport.getDayStartCalendar(startTime);
         System.out.println(calendar.getTime());
